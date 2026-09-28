@@ -10,7 +10,10 @@ app = FastAPI(
 )
 
 MODEL_PATH = "models/random_forest.joblib"
+SCALER_PATH = "models/feature_scaler.joblib"
+
 model = joblib.load(MODEL_PATH)
+scaler = joblib.load(SCALER_PATH)
 
 FEATURES = [
     "Time",
@@ -70,6 +73,10 @@ def predict(transaction: Transaction):
     input_data = pd.DataFrame(
         [[data[feature] for feature in FEATURES]],
         columns=FEATURES,
+    )
+
+    input_data[["Time", "Amount"]] = scaler.transform(
+        input_data[["Time", "Amount"]]
     )
 
     probability = float(model.predict_proba(input_data)[0][1])

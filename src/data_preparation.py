@@ -2,10 +2,12 @@ import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import joblib
 
 
 RAW_DATA = Path("data/creditcard.csv")
 PROCESSED_DIR = Path("data/processed")
+MODELS_DIR = Path("models")
 
 
 def main():
@@ -48,8 +50,17 @@ def main():
         X_test[["Time", "Amount"]]
     )
 
-    # Create processed directory
+    # Create output directories
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+    MODELS_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Save fitted scaler for inference
+    joblib.dump(
+        scaler,
+        MODELS_DIR / "feature_scaler.joblib"
+    )
+
+    print("Scaler saved: models/feature_scaler.joblib")
 
     # Save prepared datasets
     X_train.to_csv(PROCESSED_DIR / "X_train.csv", index=False)
