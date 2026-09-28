@@ -1,0 +1,10 @@
+metric,value
+training_samples,226980.0
+testing_samples,56746.0
+features,30.0
+training_normal,226602.0
+training_fraud,378.0
+testing_normal,56651.0
+testing_fraud,95.0
+normal_class_weight,0.5008340614822464
+fraud_class_weight,300.23809523809524
