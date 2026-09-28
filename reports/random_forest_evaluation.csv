@@ -1,0 +1,7 @@
+metric,value
+true_negatives,56649.0
+false_positives,2.0
+false_negatives,27.0
+true_positives,68.0
+roc_auc,0.9445361209770999
+pr_auc,0.8081346209247655
