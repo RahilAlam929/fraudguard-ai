@@ -77,9 +77,17 @@ def predict(transaction: Transaction):
     threshold = 0.50
     prediction = int(probability >= threshold)
 
+    if probability >= 0.70:
+        risk_level = "HIGH"
+    elif probability >= 0.30:
+        risk_level = "MEDIUM"
+    else:
+        risk_level = "LOW"
+
     return {
         "fraud_probability": round(probability, 6),
         "prediction": prediction,
         "is_fraud": bool(prediction),
+        "risk_level": risk_level,
         "threshold": threshold,
     }
